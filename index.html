@@ -16,9 +16,11 @@
       <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#77746a;font-weight:700;">
         SCR-7966 / SCR-7949
       </div>
-      <div style="display:flex;gap:6px;align-items:center;">
+      <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
         <button id="btnLangEn" onclick="setLang('en')" style="border:1px solid #d3d1c7;border-radius:999px;padding:6px 11px;background:#2c2c2a;color:#ffffff;cursor:pointer;font-weight:800;font-size:12px;">EN</button>
+        <button id="btnLangDe" onclick="setLang('de')" style="border:1px solid #d3d1c7;border-radius:999px;padding:6px 11px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:800;font-size:12px;">DE</button>
         <button id="btnLangSl" onclick="setLang('sl')" style="border:1px solid #d3d1c7;border-radius:999px;padding:6px 11px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:800;font-size:12px;">SL</button>
+        <button id="btnLangHr" onclick="setLang('hr')" style="border:1px solid #d3d1c7;border-radius:999px;padding:6px 11px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:800;font-size:12px;">HR</button>
       </div>
     </div>
 
@@ -323,6 +325,77 @@ const TEXTS = {
     }
   },
 
+  de: {
+    mainTitle: "Logik des kombinierten Versicherungsfallstatus",
+    mainIntro: "Service zur Prüfung des tatsächlichen Status / Substatus eines Versicherungsfalls und zur Ermittlung des daraus resultierenden Combined Insured Event Status. ADUM-Dokumente sind sichtbar, sobald das Dokument erstellt wurde; der KPOR-Postfach-Tab wird über den Eingangskanal des Claims bestimmt.",
+    interactiveTest: "Interaktiver Test",
+    statusTester: "Tester für Statuskombinationen",
+    testerIntro: "Wähle Eingangskanal des Claims, Ort des Versicherungsfalls, Status, Detailstatus und Claim-Status aus. Der Tester berechnet den kombinierten Status und den KPOR-Postfach-Tab. Detailstatus 3 - Requirement hat immer Priorität.",
+    locLabel: "Wo befindet sich der Versicherungsfall?",
+    claimIncomingChannel: "Eingangskanal des Claims",
+    insuredEventStatus: "Status des Versicherungsfalls",
+    detStatus: "Detailstatus des Versicherungsfalls",
+    claimsOnIe: "Claims zu diesem Versicherungsfall",
+    addClaim: "+ Claim hinzufügen",
+    noClaims: "Keine Claims erfasst - es wird nur der Status des Versicherungsfalls verwendet.",
+    resultLabel: "kombinierter Versicherungsfallstatus",
+    kporTab: "KPOR-Tab",
+    visibilityTrigger: "Sichtbarkeitsauslöser",
+    documentCreatedUpper: "DOKUMENT ERSTELLT",
+    logicalSummaryTitle: "Logische Zusammenfassung / Lösungsbeschreibung",
+    logicalP1: "Die vorgeschlagene Lösung führt einen zentralen Combined Insured Event Status ein, der auf Basis des Status des Versicherungsfalls, des Detailstatus am Versicherungsfall und der zugehörigen Claim-Status berechnet wird.",
+    logicalP2: "Der Detailstatus 3 - Requirement hat absolute Priorität. Wenn der Detailstatus am Versicherungsfall 3 - Requirement ist, ist der Combined Insured Event Status immer REQUIREMENT, unabhängig vom Status des Versicherungsfalls und unabhängig von den zugehörigen Claim-Status.",
+    logicalP3: "ADUM-Dokumente sind sichtbar, sobald das Dokument erstellt wurde. Der Ziel-KPOR-Postfach-Tab wird über den Eingangskanal des Claims bestimmt: Post, E-Mail, Website, Merkur App und Customer Portal werden im Posteingang angezeigt; IPS wird in Von Makler Betreut angezeigt.",
+    logicalP4: "Die einzelnen technischen Werte, wie Status des Versicherungsfalls, Substatus / Detailstatus des Versicherungsfalls und Claim-Status, können weiterhin für Transparenz, Tests, Debugging oder andere interne Zwecke angezeigt werden. Der Combined Status bleibt der zentrale Statuswert für Anzeige- und Servicelogik.",
+    adumTitle: "Logik der Sichtbarkeit von ADUM-Dokumenten",
+    adumP1: "Im Rahmen von SCR-7966 MI: CP Inbox extension, bei dem ein neuer Tab ergänzt wird, ist für die Dokumente ADUM GV und ADUM ANFORDERUNGEN folgende Logik definiert. Die Sichtbarkeit wird ausgelöst, sobald das Dokument erstellt wurde. Der KPOR-Postfach-Tab wird über den Eingangskanal des Claims bestimmt.",
+    parameter: "Parameter",
+    valueRule: "Wert / Regel",
+    kporDisplayTab: "KPOR-Anzeigetab",
+    documentCreated: "Dokument erstellt",
+    visibleForCustomer: "Für Kunden sichtbar",
+    visibleForCustomerValue: "Sobald das ADUM-Dokument erstellt wurde. Der KPOR-Tab wird entsprechend dem Eingangskanal des Claims ausgewählt.",
+    adumInfoBox: "Das ADUM-Dokument ist sichtbar, sobald das Dokument erstellt wurde. Der frühere Sichtbarkeitsauslöser SETTLED / REJECTED wird für diese Entscheidung zur Dokumentsichtbarkeit nicht mehr verwendet. Der KPOR-Postfach-Tab wird über den Eingangskanal des Claims bestimmt: Kanäle 1 Post, 2 E-Mail, 3 Website, 4 Merkur App und 5 Customer Portal werden im Posteingang angezeigt; Kanal 6 IPS wird in Von Makler Betreut angezeigt.",
+    combinedClaimsTitle: "Combined Insured Event Status auf Basis von Claims",
+    combinedClaimsP1: "Die Status SETTLED und REJECTED sind mit dem JIRA-Ticket SCR-7949 verknüpft, in dem die detaillierte Logik zur Ermittlung des Versicherungsfallstatus auf Basis der Claim-Status mit dem Attribut COMBINED INSURED EVENT STATUS BASED ON CLAIMS definiert ist.",
+    combinedClaimsP2: "Der Eingangskanal des Claims ändert den Combined Insured Event Status nicht. Er bestimmt nur den KPOR-Postfach-Tab, in dem das erstellte ADUM-Dokument angezeigt wird.",
+    savedDesc: "Der Versicherungsfall wurde in einem externen System, zum Beispiel IPS, erstellt und wurde noch nicht nach Symass übertragen.",
+    inProcessDesc: "Der Versicherungsfall ist noch offen oder mindestens ein zugehöriger Claim ist in Bearbeitung bzw. zurückgestellt.",
+    requirementDesc: "Detailstatus am Versicherungsfall = 3 - Requirement. Dieser Status hat absolute Priorität und ist unabhängig vom Status des Versicherungsfalls und von den Claim-Status.",
+    settledDesc: "Der Versicherungsfall oder die zugehörigen Claims sind endgültig abgeschlossen. Eine Mischung aus settled und rejected Claims wird ebenfalls als SETTLED behandelt, wenn mindestens ein Claim settled ist.",
+    rejectedDesc: "Der Versicherungsfall ist disposed of, oder alle zugehörigen Claims sind rejected / mistakenly entered.",
+    claimObjectMapping: "Mapping des Claim-Objekts",
+    insuredEventObjectMapping: "Mapping des Versicherungsfalls",
+    combinedGroup: "Kombinierte Gruppe",
+    claimStatus: "Claim-Status",
+    channelMappingTitle: "Mapping des Claim-Eingangskanals zum KPOR-Postfach-Tab",
+    channelMappingP1: "Das folgende Mapping definiert, in welchem KPOR-Postfach-Tab das erstellte ADUM-Dokument angezeigt wird, abhängig vom Eingangskanal des Claims.",
+    channelCode: "Code des Claim-Eingangskanals",
+    portalVisibilityPrefix: "Portalsichtbarkeit: ADUM-Dokumente sind sichtbar, sobald das Dokument erstellt wurde · KPOR-Tab: ",
+    removeClaim: "Claim entfernen",
+    locOptions: {
+      symass: "In Symass",
+      external: "Nur im externen System, z. B. IPS - noch nicht übertragen"
+    },
+    detOptions: {
+      empty: "nicht gesetzt",
+      req: "3 - Requirement"
+    },
+    reasons: {
+      saved: "Der Versicherungsfall wurde im externen System erstellt und noch nicht nach Symass übertragen.",
+      requirement: "Detailstatus am Versicherungsfall = 3 - Requirement. Requirement hat absolute Priorität, unabhängig vom Status des Versicherungsfalls und von den Claim-Status.",
+      noClaimsProcess: "Es sind keine Claims vorhanden. Der Status des Versicherungsfalls gehört zur Gruppe PROCESS.",
+      noClaimsSettled: "Es sind keine Claims vorhanden. Der Status des Versicherungsfalls gehört zur Gruppe SETTLED.",
+      noClaimsRejected: "Es sind keine Claims vorhanden. Der Status des Versicherungsfalls gehört zur Gruppe REJECTED.",
+      fallback: "Fallback auf IN PROCESS, da keine eindeutige Statusgruppe ermittelt werden konnte.",
+      hasProcess: "Mindestens ein Claim ist in der Gruppe PROCESS: 1 In Process oder 5 Postponed. Dies hat Priorität vor allen anderen Claim-Kombinationen.",
+      allSettled: "Alle Claims sind in der Gruppe SETTLED: 3 Settled, 7 Reverted oder 4 Migrated Claim.",
+      mixSettledRejected: "Mindestens ein Claim ist settled und alle übrigen Claims sind rejected. Settled hat Vorrang.",
+      allRejected: "Alle Claims sind in der Gruppe REJECTED: 2 Rejected oder 6 Mistakenly entered.",
+      mixedFallback: "Gemischte Kombination ohne klares Endergebnis. Fallback auf IN PROCESS."
+    }
+  },
+
   sl: {
     mainTitle: "Logika kombiniranega statusa zavarovalnega primera",
     mainIntro: "Stran je namenjena preverjanju dejanskega statusa / podstatusa zavarovalnega primera in določitvi rezultata Combined Insured Event Status. ADUM dokumenti so vidni takoj, ko je dokument ustvarjen; KPOR Postfach tab se določi glede na vhodni kanal claima.",
@@ -391,6 +464,77 @@ const TEXTS = {
       mixSettledRejected: "Vsaj en claim je settled, vsi ostali claim-i pa so rejected. Settled ima prednost.",
       allRejected: "Vsi claim-i so v skupini REJECTED: 2 Rejected ali 6 Mistakenly entered.",
       mixedFallback: "Mešana kombinacija brez jasnega končnega rezultata. Fallback na IN PROCESS."
+    }
+  },
+
+  hr: {
+    mainTitle: "Logika kombiniranog statusa osiguranog slučaja",
+    mainIntro: "Stranica služi za provjeru stvarnog statusa / podstatusa osiguranog slučaja i za određivanje rezultirajućeg Combined Insured Event Status. ADUM dokumenti vidljivi su čim je dokument kreiran; KPOR Postfach tab određuje se prema ulaznom kanalu claima.",
+    interactiveTest: "Interaktivni test",
+    statusTester: "Tester kombinacija statusa",
+    testerIntro: "Odaberi ulazni kanal claima, lokaciju osiguranog slučaja, status, detaljni status i claim statuse. Tester izračunava kombinirani status i KPOR Postfach tab. Detaljni status 3 - Requirement uvijek ima prioritet.",
+    locLabel: "Gdje se nalazi osigurani slučaj?",
+    claimIncomingChannel: "Ulazni kanal claima",
+    insuredEventStatus: "Status osiguranog slučaja",
+    detStatus: "Detaljni status osiguranog slučaja",
+    claimsOnIe: "Claimovi na ovom osiguranom slučaju",
+    addClaim: "+ dodaj claim",
+    noClaims: "Nema unesenih claimova - koristi se samo status osiguranog slučaja.",
+    resultLabel: "kombinirani status osiguranog slučaja",
+    kporTab: "KPOR tab",
+    visibilityTrigger: "Okidač vidljivosti",
+    documentCreatedUpper: "DOKUMENT KREIRAN",
+    logicalSummaryTitle: "Logički sažetak / opis rješenja",
+    logicalP1: "Predloženo rješenje uvodi jedan centralni Combined Insured Event Status, koji se izračunava na temelju statusa osiguranog slučaja, detaljnog statusa na osiguranom slučaju i povezanih claim statusa.",
+    logicalP2: "Detaljni status 3 - Requirement ima apsolutni prioritet. Ako je detaljni status na osiguranom slučaju 3 - Requirement, Combined Insured Event Status uvijek je REQUIREMENT, neovisno o statusu osiguranog slučaja i neovisno o povezanim claim statusima.",
+    logicalP3: "ADUM dokumenti vidljivi su čim je dokument kreiran. Ciljni KPOR Postfach tab određuje se prema ulaznom kanalu claima: Post, E-Mail, Website, Merkur App i Customer Portal prikazuju se u Posteingang; IPS se prikazuje u Von Makler Betreut.",
+    logicalP4: "Pojedinačne tehničke vrijednosti, kao što su status osiguranog slučaja, podstatus / detaljni status osiguranog slučaja i claim status, mogu se i dalje prikazivati radi transparentnosti, testiranja, debugiranja ili drugih internih potreba. Combined Status ostaje centralna statusna vrijednost za prikaz i servisnu logiku.",
+    adumTitle: "Logika vidljivosti ADUM dokumenata",
+    adumP1: "U okviru SCR-7966 MI: CP Inbox extension, gdje se dodaje novi tab, za dokumente ADUM GV i ADUM ANFORDERUNGEN definirana je sljedeća logika. Vidljivost se aktivira kada je dokument kreiran. KPOR Postfach tab određuje se prema ulaznom kanalu claima.",
+    parameter: "Parametar",
+    valueRule: "Vrijednost / pravilo",
+    kporDisplayTab: "KPOR prikazni tab",
+    documentCreated: "Dokument kreiran",
+    visibleForCustomer: "Vidljivo za klijenta",
+    visibleForCustomerValue: "Čim je ADUM dokument kreiran. KPOR tab odabire se prema ulaznom kanalu claima.",
+    adumInfoBox: "ADUM dokument vidljiv je čim je dokument kreiran. Prijašnji okidač vidljivosti SETTLED / REJECTED više se ne koristi za ovu odluku o vidljivosti dokumenta. KPOR Postfach tab određuje se prema ulaznom kanalu claima: kanali 1 Post, 2 E-Mail, 3 Website, 4 Merkur App i 5 Customer Portal prikazuju se u Posteingang; kanal 6 IPS prikazuje se u Von Makler Betreut.",
+    combinedClaimsTitle: "Combined Insured Event Status na temelju claimova",
+    combinedClaimsP1: "Statusi SETTLED i REJECTED povezani su s JIRA ticketom SCR-7949, gdje je detaljna logika za određivanje statusa osiguranog slučaja na temelju claim statusa definirana atributom: COMBINED INSURED EVENT STATUS BASED ON CLAIMS.",
+    combinedClaimsP2: "Ulazni kanal claima ne mijenja Combined Insured Event Status. On samo određuje KPOR Postfach tab u kojem se prikazuje kreirani ADUM dokument.",
+    savedDesc: "Osigurani slučaj kreiran je u vanjskom sustavu, na primjer IPS, i još nije prenesen u Symass.",
+    inProcessDesc: "Osigurani slučaj je još otvoren ili je barem jedan povezani claim u obradi odnosno odgođen.",
+    requirementDesc: "Detaljni status na osiguranom slučaju = 3 - Requirement. Ovaj status ima apsolutni prioritet i neovisan je o statusu osiguranog slučaja i claim statusima.",
+    settledDesc: "Osigurani slučaj ili povezani claimovi konačno su zaključeni. Kombinacija settled i rejected claimova također se tretira kao SETTLED ako je barem jedan claim settled.",
+    rejectedDesc: "Osigurani slučaj je disposed of ili su svi povezani claimovi rejected / mistakenly entered.",
+    claimObjectMapping: "Mapping claim objekta",
+    insuredEventObjectMapping: "Mapping osiguranog slučaja",
+    combinedGroup: "Kombinirana grupa",
+    claimStatus: "Claim status",
+    channelMappingTitle: "Mapping ulaznog kanala claima na KPOR Postfach tab",
+    channelMappingP1: "Sljedeći mapping definira u kojem se KPOR Postfach tabu prikazuje kreirani ADUM dokument, ovisno o ulaznom kanalu claima.",
+    channelCode: "Kod ulaznog kanala claima",
+    portalVisibilityPrefix: "Vidljivost u portalu: ADUM dokumenti vidljivi su čim je dokument kreiran · KPOR tab: ",
+    removeClaim: "ukloni claim",
+    locOptions: {
+      symass: "U Symass",
+      external: "Samo u vanjskom sustavu, npr. IPS - još nije preneseno"
+    },
+    detOptions: {
+      empty: "nije postavljeno",
+      req: "3 - Requirement"
+    },
+    reasons: {
+      saved: "Osigurani slučaj kreiran je u vanjskom sustavu i još nije prenesen u Symass.",
+      requirement: "Detaljni status na osiguranom slučaju = 3 - Requirement. Requirement ima apsolutni prioritet, bez obzira na status osiguranog slučaja i claim statuse.",
+      noClaimsProcess: "Claimovi nisu uneseni. Status osiguranog slučaja pripada grupi PROCESS.",
+      noClaimsSettled: "Claimovi nisu uneseni. Status osiguranog slučaja pripada grupi SETTLED.",
+      noClaimsRejected: "Claimovi nisu uneseni. Status osiguranog slučaja pripada grupi REJECTED.",
+      fallback: "Fallback na IN PROCESS jer nije moguće odrediti jasnu statusnu grupu.",
+      hasProcess: "Barem jedan claim je u grupi PROCESS: 1 In Process ili 5 Postponed. To ima prioritet pred svim drugim claim kombinacijama.",
+      allSettled: "Svi claimovi su u grupi SETTLED: 3 Settled, 7 Reverted ili 4 Migrated Claim.",
+      mixSettledRejected: "Barem jedan claim je settled, a svi preostali claimovi su rejected. Settled ima prednost.",
+      allRejected: "Svi claimovi su u grupi REJECTED: 2 Rejected ili 6 Mistakenly entered.",
+      mixedFallback: "Mješovita kombinacija bez jasnog konačnog rezultata. Fallback na IN PROCESS."
     }
   }
 };
@@ -473,10 +617,13 @@ function applyTexts() {
   });
 
   document.documentElement.lang = currentLang;
-  document.getElementById("btnLangEn").style.background = currentLang === "en" ? "#2c2c2a" : "#ffffff";
-  document.getElementById("btnLangEn").style.color = currentLang === "en" ? "#ffffff" : "#2c2c2a";
-  document.getElementById("btnLangSl").style.background = currentLang === "sl" ? "#2c2c2a" : "#ffffff";
-  document.getElementById("btnLangSl").style.color = currentLang === "sl" ? "#ffffff" : "#2c2c2a";
+
+  ["en", "de", "sl", "hr"].forEach(lang => {
+    const btn = document.getElementById("btnLang" + lang.charAt(0).toUpperCase() + lang.slice(1));
+    if (!btn) return;
+    btn.style.background = currentLang === lang ? "#2c2c2a" : "#ffffff";
+    btn.style.color = currentLang === lang ? "#ffffff" : "#2c2c2a";
+  });
 }
 
 function setLang(lang) {
