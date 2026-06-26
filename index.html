@@ -1,74 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Combined Insured Event Status Logic</title>
+</head>
+
+<body style="margin:0;padding:24px;background:#f5f4f0;">
+
 <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;color:#2c2c2a;background:#ffffff;max-width:980px;margin:0 auto;padding:24px;border:1px solid #e8e6dd;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,0.06);">
 
   <!-- HEADER -->
   <div style="margin-bottom:24px;padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,#f3f0e8,#ffffff);border:1px solid #e4e0d4;">
-    <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#77746a;font-weight:700;margin-bottom:8px;">
-      SCR-7966 / SCR-7949
+    <div style="display:flex;justify-content:space-between;gap:12px;align-items:flex-start;flex-wrap:wrap;margin-bottom:10px;">
+      <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#77746a;font-weight:700;">
+        SCR-7966 / SCR-7949
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <button id="btnLangEn" onclick="setLang('en')" style="border:1px solid #d3d1c7;border-radius:999px;padding:6px 11px;background:#2c2c2a;color:#ffffff;cursor:pointer;font-weight:800;font-size:12px;">EN</button>
+        <button id="btnLangSl" onclick="setLang('sl')" style="border:1px solid #d3d1c7;border-radius:999px;padding:6px 11px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:800;font-size:12px;">SL</button>
+      </div>
     </div>
-    <h1 style="font-size:28px;line-height:1.25;margin:0 0 10px 0;color:#2c2c2a;">
+
+    <h1 data-i18n="mainTitle" style="font-size:28px;line-height:1.25;margin:0 0 10px 0;color:#2c2c2a;">
       Combined Insured Event Status Logic
     </h1>
-    <p style="font-size:15px;line-height:1.6;margin:0;color:#5f5e5a;">
+
+    <p data-i18n="mainIntro" style="font-size:15px;line-height:1.6;margin:0;color:#5f5e5a;">
       Service for checking the actual status / substatus of an Insured Event and defining the resulting Combined Insured Event Status. ADUM documents are visible as soon as the document is created; the KPOR Postfach tab is determined by the Claim incoming channel.
     </p>
   </div>
 
-  <!-- TESTER FIRST -->
+  <!-- TESTER -->
   <div style="margin-bottom:24px;padding:22px 24px;border-radius:14px;background:#fbfaf7;border:1px solid #e8e6dd;">
     <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:18px;flex-wrap:wrap;">
       <div>
-        <div style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#77746a;font-weight:700;margin-bottom:6px;">
+        <div data-i18n="interactiveTest" style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#77746a;font-weight:700;margin-bottom:6px;">
           Interactive test
         </div>
-        <h2 style="font-size:22px;margin:0;color:#2c2c2a;">
+        <h2 data-i18n="statusTester" style="font-size:22px;margin:0;color:#2c2c2a;">
           Status combination tester
         </h2>
       </div>
-      <div style="font-size:13px;line-height:1.5;color:#77746a;max-width:360px;">
+      <div data-i18n="testerIntro" style="font-size:13px;line-height:1.5;color:#77746a;max-width:360px;">
         Select Claim incoming channel, Insured Event location, status, detailed status and claim statuses to calculate the resulting combined status and the KPOR Postfach tab. Detailed status 3 - Requirement always has priority.
       </div>
     </div>
 
     <div style="margin-bottom:16px;">
-      <label for="loc" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Where is the Insured Event located?</label>
-      <select id="loc" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;">
-        <option value="symass">In Symass</option>
-        <option value="external">Only in the external system, e.g. IPS - not yet transferred</option>
-      </select>
+      <label data-i18n="locLabel" for="loc" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Where is the Insured Event located?</label>
+      <select id="loc" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;"></select>
     </div>
 
     <div style="margin-bottom:16px;">
-      <label for="claimIncomingChannel" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Claim incoming channel</label>
-      <select id="claimIncomingChannel" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;">
-        <option value="1">1 - Post</option>
-        <option value="2">2 - E-Mail</option>
-        <option value="3">3 - Website</option>
-        <option value="4">4 - Merkur App</option>
-        <option value="5">5 - Customer Portal</option>
-        <option value="6" selected>6 - IPS</option>
-      </select>
+      <label data-i18n="claimIncomingChannel" for="claimIncomingChannel" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Claim incoming channel</label>
+      <select id="claimIncomingChannel" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;"></select>
     </div>
 
     <table style="width:100%;border-collapse:collapse;margin-bottom:16px;">
       <tr>
         <td style="width:50%;padding:0 7px 0 0;vertical-align:top;">
-          <label for="insuredEventStatus" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Insured Event status</label>
-          <select id="insuredEventStatus" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;">
-            <option value="1">1 - In Process</option>
-            <option value="5">5 - Re-opened</option>
-            <option value="6">6 - Postponed</option>
-            <option value="2">2 - Finished</option>
-            <option value="4">4 - Preliminary finished</option>
-            <option value="7">7 - Time-barred</option>
-            <option value="3">3 - Disposed of</option>
-          </select>
+          <label data-i18n="insuredEventStatus" for="insuredEventStatus" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Insured Event status</label>
+          <select id="insuredEventStatus" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;"></select>
         </td>
         <td style="width:50%;padding:0 0 0 7px;vertical-align:top;">
-          <label for="detStatus" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Detailed status on Insured Event</label>
-          <select id="detStatus" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;">
-            <option value="">not set</option>
-            <option value="3">3 - Requirement</option>
-          </select>
+          <label data-i18n="detStatus" for="detStatus" style="font-size:13px;color:#5f5e5a;display:block;margin-bottom:6px;font-weight:700;">Detailed status on Insured Event</label>
+          <select id="detStatus" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;"></select>
         </td>
       </tr>
     </table>
@@ -77,154 +74,120 @@
       <table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
         <tr>
           <td style="vertical-align:middle;">
-            <label style="font-size:13px;color:#5f5e5a;margin:0;font-weight:700;">Claims on this Insured Event</label>
+            <label data-i18n="claimsOnIe" style="font-size:13px;color:#5f5e5a;margin:0;font-weight:700;">Claims on this Insured Event</label>
           </td>
           <td style="width:1%;white-space:nowrap;text-align:right;vertical-align:middle;">
-            <button onclick="addClaim()" style="font-size:13px;border:1px solid #d3d1c7;border-radius:10px;padding:7px 13px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:700;">+ add claim</button>
+            <button onclick="addClaim()" style="font-size:13px;border:1px solid #d3d1c7;border-radius:10px;padding:7px 13px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:700;">
+              <span data-i18n="addClaim">+ add claim</span>
+            </button>
           </td>
         </tr>
       </table>
       <div id="claimsList"></div>
-      <p id="noClaims" style="font-size:13px;color:#888780;margin:4px 0 0;">No claims entered - only the Insured Event status is used.</p>
+      <p id="noClaims" data-i18n="noClaims" style="font-size:13px;color:#888780;margin:4px 0 0;">No claims entered - only the Insured Event status is used.</p>
     </div>
 
     <div id="resultCard" style="border-radius:14px;padding:20px 22px;background:#f1efe8;border:1px solid rgba(0,0,0,0.04);">
-      <div id="resultLabel" style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;opacity:0.75;color:#5f5e5a;font-weight:800;">combined insured event status</div>
+      <div id="resultLabel" data-i18n="resultLabel" style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:6px;opacity:0.75;color:#5f5e5a;font-weight:800;">combined insured event status</div>
       <div id="resultValue" style="font-size:30px;font-weight:800;color:#5f5e5a;line-height:1.2;">-</div>
       <div id="portalVisibility" style="display:inline-block;font-size:13px;font-weight:800;margin-top:10px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.72);color:#5f5e5a;">Portal visibility: -</div>
       <div id="resultReason" style="font-size:14px;margin-top:12px;color:#5f5e5a;line-height:1.6;"></div>
     </div>
   </div>
 
-  <!-- META WITHOUT RESPONSIBLE / INVOLVED -->
+  <!-- META -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:24px;">
     <div style="padding:14px 16px;border-radius:12px;background:#f8f7f3;border:1px solid #ebe8de;">
-      <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:#77746a;font-weight:700;margin-bottom:6px;">Claim incoming channel</div>
+      <div data-i18n="claimIncomingChannel" style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:#77746a;font-weight:700;margin-bottom:6px;">Claim incoming channel</div>
       <div id="metaIncomingChannel" style="font-size:20px;font-weight:700;color:#2c2c2a;">6 - IPS</div>
     </div>
 
     <div style="padding:14px 16px;border-radius:12px;background:#f8f7f3;border:1px solid #ebe8de;">
-      <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:#77746a;font-weight:700;margin-bottom:6px;">KPOR tab</div>
+      <div data-i18n="kporTab" style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:#77746a;font-weight:700;margin-bottom:6px;">KPOR tab</div>
       <div id="metaKporTab" style="font-size:20px;font-weight:700;color:#2c2c2a;">Von Makler Betreut</div>
     </div>
 
     <div style="padding:14px 16px;border-radius:12px;background:#e1f5ee;border:1px solid #b9e6d9;">
-      <div style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:#085041;font-weight:700;margin-bottom:6px;">Visibility trigger</div>
-      <div style="font-size:20px;font-weight:700;color:#085041;">DOCUMENT CREATED</div>
+      <div data-i18n="visibilityTrigger" style="font-size:12px;text-transform:uppercase;letter-spacing:0.06em;color:#085041;font-weight:700;margin-bottom:6px;">Visibility trigger</div>
+      <div data-i18n="documentCreatedUpper" style="font-size:20px;font-weight:700;color:#085041;">DOCUMENT CREATED</div>
     </div>
   </div>
 
   <!-- LOGICAL SUMMARY -->
   <div style="margin-bottom:24px;padding:22px 24px;border-radius:14px;background:#ffffff;border:1px solid #e8e6dd;">
-    <h2 style="font-size:22px;margin:0 0 14px 0;color:#2c2c2a;">
+    <h2 data-i18n="logicalSummaryTitle" style="font-size:22px;margin:0 0 14px 0;color:#2c2c2a;">
       Logical summary / solution description
     </h2>
 
-    <p style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#44433f;">
-      The proposed solution is to introduce one central <strong>Combined Insured Event Status</strong>, which is calculated based on the Insured Event status, the detailed status on the Insured Event and the related claim statuses.
-    </p>
-
-    <p style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#44433f;">
-      The detailed status <strong>3 - Requirement</strong> has absolute priority. If the detailed status on the Insured Event is 3 - Requirement, the Combined Insured Event Status is always <strong>REQUIREMENT</strong>, regardless of the Insured Event status and regardless of the related claim statuses.
-    </p>
-
-    <p style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#44433f;">
-      ADUM documents are visible as soon as the document is created. The target KPOR Postfach tab is determined by the <strong>Claim incoming channel</strong>: Post, E-Mail, Website, Merkur App and Customer Portal are shown in <strong>Posteingang</strong>; IPS is shown in <strong>Von Makler Betreut</strong>.
-    </p>
-
-    <p style="font-size:15px;line-height:1.7;margin:0;color:#44433f;">
-      The individual technical values, such as Insured Event status, Insured Event substatus / detailed status and claim status, may still be exposed for transparency, testing, debugging or other internal purposes. The Combined Status remains the central status value for display and service logic.
-    </p>
+    <p data-i18n="logicalP1" style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#44433f;"></p>
+    <p data-i18n="logicalP2" style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#44433f;"></p>
+    <p data-i18n="logicalP3" style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#44433f;"></p>
+    <p data-i18n="logicalP4" style="font-size:15px;line-height:1.7;margin:0;color:#44433f;"></p>
   </div>
 
   <!-- BUSINESS RULE -->
   <div style="margin-bottom:24px;padding:22px 24px;border-radius:14px;background:#f7fbff;border:1px solid #d7e8f7;">
-    <h2 style="font-size:22px;margin:0 0 14px 0;color:#0c447c;">
+    <h2 data-i18n="adumTitle" style="font-size:22px;margin:0 0 14px 0;color:#0c447c;">
       ADUM document visibility logic
     </h2>
 
-    <p style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#274761;">
-      Within <strong>SCR-7966 MI: CP Inbox extension</strong> (adding a new tab), the following logic is defined for the documents <strong>ADUM GV</strong> and <strong>ADUM ANFORDERUNGEN</strong>. The visibility is triggered when the document is created. The KPOR Postfach tab is determined by the <strong>Claim incoming channel</strong>.
-    </p>
+    <p data-i18n="adumP1" style="font-size:15px;line-height:1.7;margin:0 0 12px 0;color:#274761;"></p>
 
     <table style="width:100%;border-collapse:collapse;margin-top:14px;font-size:14px;">
       <tr>
-        <th style="text-align:left;padding:10px 12px;background:#e6f1fb;color:#0c447c;border:1px solid #c9dff0;">Parameter</th>
-        <th style="text-align:left;padding:10px 12px;background:#e6f1fb;color:#0c447c;border:1px solid #c9dff0;">Value / Rule</th>
+        <th data-i18n="parameter" style="text-align:left;padding:10px 12px;background:#e6f1fb;color:#0c447c;border:1px solid #c9dff0;">Parameter</th>
+        <th data-i18n="valueRule" style="text-align:left;padding:10px 12px;background:#e6f1fb;color:#0c447c;border:1px solid #c9dff0;">Value / Rule</th>
       </tr>
       <tr>
-        <td style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">Claim incoming channel</td>
+        <td data-i18n="claimIncomingChannel" style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">Claim incoming channel</td>
         <td id="businessIncomingChannel" style="padding:10px 12px;border:1px solid #d7e8f7;">6 - IPS</td>
       </tr>
       <tr>
-        <td style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">KPOR display tab</td>
+        <td data-i18n="kporDisplayTab" style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">KPOR display tab</td>
         <td id="businessKporTab" style="padding:10px 12px;border:1px solid #d7e8f7;">Von Makler Betreut</td>
       </tr>
       <tr>
-        <td style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">Visibility trigger</td>
-        <td style="padding:10px 12px;border:1px solid #d7e8f7;">Document created</td>
+        <td data-i18n="visibilityTrigger" style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">Visibility trigger</td>
+        <td data-i18n="documentCreated" style="padding:10px 12px;border:1px solid #d7e8f7;">Document created</td>
       </tr>
       <tr>
-        <td style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">Visible for customer</td>
-        <td style="padding:10px 12px;border:1px solid #d7e8f7;">As soon as the ADUM document is created. The KPOR tab is selected according to the Claim incoming channel.</td>
+        <td data-i18n="visibleForCustomer" style="padding:10px 12px;border:1px solid #d7e8f7;font-weight:600;">Visible for customer</td>
+        <td data-i18n="visibleForCustomerValue" style="padding:10px 12px;border:1px solid #d7e8f7;"></td>
       </tr>
     </table>
 
-    <div style="margin-top:16px;padding:14px 16px;border-radius:12px;background:#ffffff;border-left:5px solid #0c447c;color:#274761;font-size:14px;line-height:1.6;">
-      The ADUM document is visible as soon as the document is created. The former visibility trigger <strong>SETTLED / REJECTED</strong> is no longer used for this document visibility decision. The KPOR Postfach tab is determined by the Claim incoming channel: channels <strong>1 Post</strong>, <strong>2 E-Mail</strong>, <strong>3 Website</strong>, <strong>4 Merkur App</strong> and <strong>5 Customer Portal</strong> are shown in <strong>Posteingang</strong>; channel <strong>6 IPS</strong> is shown in <strong>Von Makler Betreut</strong>.
-    </div>
+    <div data-i18n="adumInfoBox" style="margin-top:16px;padding:14px 16px;border-radius:12px;background:#ffffff;border-left:5px solid #0c447c;color:#274761;font-size:14px;line-height:1.6;"></div>
   </div>
 
   <!-- STATUS LOGIC -->
   <div style="margin-bottom:24px;padding:22px 24px;border-radius:14px;background:#ffffff;border:1px solid #e8e6dd;">
-    <h2 style="font-size:22px;margin:0 0 14px 0;color:#2c2c2a;">
+    <h2 data-i18n="combinedClaimsTitle" style="font-size:22px;margin:0 0 14px 0;color:#2c2c2a;">
       Combined Insured Event Status based on claims
     </h2>
 
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px 0;color:#44433f;">
-      The statuses <strong>SETTLED</strong> and <strong>REJECTED</strong> are linked to JIRA ticket <strong>SCR-7949</strong>, where the detailed logic for determining the Insured Event status based on claim statuses is defined using the attribute:
-      <br>
-      <strong>“COMBINED INSURED EVENT STATUS BASED ON CLAIMS”</strong>
-    </p>
-
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px 0;color:#44433f;">
-      The <strong>Claim incoming channel</strong> does not change the Combined Insured Event Status. It only determines the KPOR Postfach tab where the created ADUM document is displayed.
-    </p>
+    <p data-i18n="combinedClaimsP1" style="font-size:15px;line-height:1.7;margin:0 0 16px 0;color:#44433f;"></p>
+    <p data-i18n="combinedClaimsP2" style="font-size:15px;line-height:1.7;margin:0 0 16px 0;color:#44433f;"></p>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;">
       <div style="padding:14px 16px;border-radius:12px;background:#f1efe8;border:1px solid #dedbd0;">
         <div style="font-size:18px;font-weight:800;color:#5f5e5a;margin-bottom:8px;">SAVED</div>
-        <div style="font-size:14px;line-height:1.6;color:#5f5e5a;">
-          The Insured Event was created in an external system, for example IPS, and has not yet been transferred to Symass.
-        </div>
+        <div data-i18n="savedDesc" style="font-size:14px;line-height:1.6;color:#5f5e5a;"></div>
       </div>
-
       <div style="padding:14px 16px;border-radius:12px;background:#e6f1fb;border:1px solid #c9dff0;">
         <div style="font-size:18px;font-weight:800;color:#0c447c;margin-bottom:8px;">IN PROCESS</div>
-        <div style="font-size:14px;line-height:1.6;color:#0c447c;">
-          The Insured Event is still open, or at least one related claim is in process or postponed.
-        </div>
+        <div data-i18n="inProcessDesc" style="font-size:14px;line-height:1.6;color:#0c447c;"></div>
       </div>
-
       <div style="padding:14px 16px;border-radius:12px;background:#faeeda;border:1px solid #ead3aa;">
         <div style="font-size:18px;font-weight:800;color:#633806;margin-bottom:8px;">REQUIREMENT</div>
-        <div style="font-size:14px;line-height:1.6;color:#633806;">
-          Detailed status on Insured Event = 3 (Requirement). This status has absolute priority and is independent of the Insured Event status and claim statuses.
-        </div>
+        <div data-i18n="requirementDesc" style="font-size:14px;line-height:1.6;color:#633806;"></div>
       </div>
-
       <div style="padding:14px 16px;border-radius:12px;background:#e1f5ee;border:1px solid #b9e6d9;">
         <div style="font-size:18px;font-weight:800;color:#085041;margin-bottom:8px;">SETTLED</div>
-        <div style="font-size:14px;line-height:1.6;color:#085041;">
-          The Insured Event or the related claims are finally completed. A mix of settled and rejected claims is also treated as settled if at least one claim is settled.
-        </div>
+        <div data-i18n="settledDesc" style="font-size:14px;line-height:1.6;color:#085041;"></div>
       </div>
-
       <div style="padding:14px 16px;border-radius:12px;background:#faece7;border:1px solid #edc8ba;">
         <div style="font-size:18px;font-weight:800;color:#712b13;margin-bottom:8px;">REJECTED</div>
-        <div style="font-size:14px;line-height:1.6;color:#712b13;">
-          The Insured Event is disposed of, or all related claims are rejected / mistakenly entered.
-        </div>
+        <div data-i18n="rejectedDesc" style="font-size:14px;line-height:1.6;color:#712b13;"></div>
       </div>
     </div>
   </div>
@@ -232,303 +195,434 @@
   <!-- MAPPING TABLES -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;">
     <div style="padding:20px;border-radius:14px;background:#ffffff;border:1px solid #e8e6dd;">
-      <h3 style="font-size:18px;margin:0 0 12px 0;color:#2c2c2a;">Claim object mapping</h3>
+      <h3 data-i18n="claimObjectMapping" style="font-size:18px;margin:0 0 12px 0;color:#2c2c2a;">Claim object mapping</h3>
       <table style="width:100%;border-collapse:collapse;font-size:14px;">
         <tr>
-          <th style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Combined group</th>
-          <th style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Claim status</th>
+          <th data-i18n="combinedGroup" style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Combined group</th>
+          <th data-i18n="claimStatus" style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Claim status</th>
         </tr>
-        <tr>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">PROCESS</td>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;">1 In Process, 5 Postponed</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#085041;">SETTLED</td>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;">3 Settled, 7 Reverted, 4 Migrated Claim</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#712b13;">REJECTED</td>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;">2 Rejected, 6 Mistakenly entered</td>
-        </tr>
+        <tr><td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">PROCESS</td><td style="padding:9px 10px;border:1px solid #e8e6dd;">1 In Process, 5 Postponed</td></tr>
+        <tr><td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#085041;">SETTLED</td><td style="padding:9px 10px;border:1px solid #e8e6dd;">3 Settled, 7 Reverted, 4 Migrated Claim</td></tr>
+        <tr><td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#712b13;">REJECTED</td><td style="padding:9px 10px;border:1px solid #e8e6dd;">2 Rejected, 6 Mistakenly entered</td></tr>
       </table>
     </div>
 
     <div style="padding:20px;border-radius:14px;background:#ffffff;border:1px solid #e8e6dd;">
-      <h3 style="font-size:18px;margin:0 0 12px 0;color:#2c2c2a;">Insured Event object mapping</h3>
+      <h3 data-i18n="insuredEventObjectMapping" style="font-size:18px;margin:0 0 12px 0;color:#2c2c2a;">Insured Event object mapping</h3>
       <table style="width:100%;border-collapse:collapse;font-size:14px;">
         <tr>
-          <th style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Combined group</th>
-          <th style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Insured Event status</th>
+          <th data-i18n="combinedGroup" style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Combined group</th>
+          <th data-i18n="insuredEventStatus" style="text-align:left;padding:9px 10px;background:#f3f0e8;border:1px solid #e4e0d4;">Insured Event status</th>
         </tr>
-        <tr>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">PROCESS</td>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;">1 In Process, 5 Re-opened, 6 Postponed</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#085041;">SETTLED</td>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;">2 Finished, 4 Preliminary finished, 7 Time-barred</td>
-        </tr>
-        <tr>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#712b13;">REJECTED</td>
-          <td style="padding:9px 10px;border:1px solid #e8e6dd;">3 Disposed of</td>
-        </tr>
+        <tr><td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">PROCESS</td><td style="padding:9px 10px;border:1px solid #e8e6dd;">1 In Process, 5 Re-opened, 6 Postponed</td></tr>
+        <tr><td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#085041;">SETTLED</td><td style="padding:9px 10px;border:1px solid #e8e6dd;">2 Finished, 4 Preliminary finished, 7 Time-barred</td></tr>
+        <tr><td style="padding:9px 10px;border:1px solid #e8e6dd;font-weight:700;color:#712b13;">REJECTED</td><td style="padding:9px 10px;border:1px solid #e8e6dd;">3 Disposed of</td></tr>
       </table>
     </div>
   </div>
 
-  <!-- CLAIM INCOMING CHANNEL TO POSTFACH TAB MAPPING -->
+  <!-- CHANNEL MAPPING -->
   <div style="margin-top:24px;padding:22px 24px;border-radius:14px;background:#ffffff;border:1px solid #e8e6dd;">
-    <h2 style="font-size:22px;margin:0 0 14px 0;color:#2c2c2a;">
+    <h2 data-i18n="channelMappingTitle" style="font-size:22px;margin:0 0 14px 0;color:#2c2c2a;">
       Claim incoming channel mapping to KPOR Postfach tab
     </h2>
 
-    <p style="font-size:15px;line-height:1.7;margin:0 0 16px 0;color:#44433f;">
-      The following mapping defines in which KPOR Postfach tab the created ADUM document is displayed, depending on the Claim incoming channel.
-    </p>
+    <p data-i18n="channelMappingP1" style="font-size:15px;line-height:1.7;margin:0 0 16px 0;color:#44433f;"></p>
 
     <table style="width:100%;border-collapse:collapse;font-size:14px;">
       <tr>
-        <th style="text-align:left;padding:10px 12px;background:#f3f0e8;border:1px solid #e4e0d4;">Claim incoming channel code</th>
-        <th style="text-align:left;padding:10px 12px;background:#f3f0e8;border:1px solid #e4e0d4;">Claim incoming channel</th>
-        <th style="text-align:left;padding:10px 12px;background:#f3f0e8;border:1px solid #e4e0d4;">KPOR Postfach tab</th>
+        <th data-i18n="channelCode" style="text-align:left;padding:10px 12px;background:#f3f0e8;border:1px solid #e4e0d4;">Claim incoming channel code</th>
+        <th data-i18n="claimIncomingChannel" style="text-align:left;padding:10px 12px;background:#f3f0e8;border:1px solid #e4e0d4;">Claim incoming channel</th>
+        <th data-i18n="kporTab" style="text-align:left;padding:10px 12px;background:#f3f0e8;border:1px solid #e4e0d4;">KPOR Postfach tab</th>
       </tr>
-      <tr>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">1</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;">Post</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">2</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;">E-Mail</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">3</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;">Website</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">4</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;">Merkur App</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">5</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;">Customer Portal</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td>
-      </tr>
-      <tr>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">6</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;">IPS</td>
-        <td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#085041;">Von Makler Betreut</td>
-      </tr>
+      <tr><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">1</td><td style="padding:10px 12px;border:1px solid #e8e6dd;">Post</td><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">2</td><td style="padding:10px 12px;border:1px solid #e8e6dd;">E-Mail</td><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">3</td><td style="padding:10px 12px;border:1px solid #e8e6dd;">Website</td><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">4</td><td style="padding:10px 12px;border:1px solid #e8e6dd;">Merkur App</td><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">5</td><td style="padding:10px 12px;border:1px solid #e8e6dd;">Customer Portal</td><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#0c447c;">Posteingang</td></tr>
+      <tr><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;">6</td><td style="padding:10px 12px;border:1px solid #e8e6dd;">IPS</td><td style="padding:10px 12px;border:1px solid #e8e6dd;font-weight:700;color:#085041;">Von Makler Betreut</td></tr>
     </table>
   </div>
 
 </div>
 
 <script>
-(function() {
-  let claims = [];
-  let nextId = 1;
+let currentLang = 'en';
+let claims = [];
+let nextId = 1;
 
-  const claimOptions = [
-    ["1","1 - In Process"],
-    ["5","5 - Postponed"],
-    ["3","3 - Settled"],
-    ["7","7 - Reverted"],
-    ["4","4 - Migrated Claim"],
-    ["2","2 - Rejected"],
-    ["6","6 - Mistakenly entered"]
-  ];
-
-  const CLAIM_INCOMING_CHANNELS = {
-    "1": { label: "1 - Post", kporTab: "Posteingang" },
-    "2": { label: "2 - E-Mail", kporTab: "Posteingang" },
-    "3": { label: "3 - Website", kporTab: "Posteingang" },
-    "4": { label: "4 - Merkur App", kporTab: "Posteingang" },
-    "5": { label: "5 - Customer Portal", kporTab: "Posteingang" },
-    "6": { label: "6 - IPS", kporTab: "Von Makler Betreut" }
-  };
-
-  window.addClaim = function() {
-    claims.push({ id: nextId++, status: "1" });
-    renderClaims();
-    compute();
-  };
-
-  window.removeClaim = function(id) {
-    claims = claims.filter(c => c.id !== id);
-    renderClaims();
-    compute();
-  };
-
-  window.setClaimStatus = function(id, val) {
-    const c = claims.find(c => c.id === id);
-    if (c) c.status = val;
-    compute();
-  };
-
-  function renderClaims() {
-    const el = document.getElementById('claimsList');
-    const noClaims = document.getElementById('noClaims');
-
-    noClaims.style.display = claims.length ? 'none' : 'block';
-
-    el.innerHTML = claims.map(c => {
-      const opts = claimOptions.map(o => `<option value="${o[0]}" ${o[0] === c.status ? 'selected' : ''}>${o[1]}</option>`).join('');
-
-      return `<table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
-        <tr>
-          <td style="padding:0 7px 0 0;">
-            <select onchange="setClaimStatus(${c.id}, this.value)" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;">${opts}</select>
-          </td>
-          <td style="width:1%;white-space:nowrap;">
-            <button onclick="removeClaim(${c.id})" aria-label="remove claim" style="font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:8px 11px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:700;">x</button>
-          </td>
-        </tr>
-      </table>`;
-    }).join('');
-  }
-
-  const PROCESS_CLAIM = ["1","5"];
-  const SETTLED_CLAIM = ["3","7","4"];
-  const REJECTED_CLAIM = ["2","6"];
-
-  const INSURED_EVENT_PROCESS = ["1","5","6"];
-  const INSURED_EVENT_SETTLED = ["2","4","7"];
-  const INSURED_EVENT_REJECTED = ["3"];
-
-  const STYLES = {
-    SAVED: {
-      bg: "#f1efe8",
-      fg: "#5f5e5a",
-      border: "#dedbd0",
-      label: "SAVED"
+const TEXTS = {
+  en: {
+    mainTitle: "Combined Insured Event Status Logic",
+    mainIntro: "Service for checking the actual status / substatus of an Insured Event and defining the resulting Combined Insured Event Status. ADUM documents are visible as soon as the document is created; the KPOR Postfach tab is determined by the Claim incoming channel.",
+    interactiveTest: "Interactive test",
+    statusTester: "Status combination tester",
+    testerIntro: "Select Claim incoming channel, Insured Event location, status, detailed status and claim statuses to calculate the resulting combined status and the KPOR Postfach tab. Detailed status 3 - Requirement always has priority.",
+    locLabel: "Where is the Insured Event located?",
+    claimIncomingChannel: "Claim incoming channel",
+    insuredEventStatus: "Insured Event status",
+    detStatus: "Detailed status on Insured Event",
+    claimsOnIe: "Claims on this Insured Event",
+    addClaim: "+ add claim",
+    noClaims: "No claims entered - only the Insured Event status is used.",
+    resultLabel: "combined insured event status",
+    kporTab: "KPOR tab",
+    visibilityTrigger: "Visibility trigger",
+    documentCreatedUpper: "DOCUMENT CREATED",
+    logicalSummaryTitle: "Logical summary / solution description",
+    logicalP1: "The proposed solution is to introduce one central Combined Insured Event Status, which is calculated based on the Insured Event status, the detailed status on the Insured Event and the related claim statuses.",
+    logicalP2: "The detailed status 3 - Requirement has absolute priority. If the detailed status on the Insured Event is 3 - Requirement, the Combined Insured Event Status is always REQUIREMENT, regardless of the Insured Event status and regardless of the related claim statuses.",
+    logicalP3: "ADUM documents are visible as soon as the document is created. The target KPOR Postfach tab is determined by the Claim incoming channel: Post, E-Mail, Website, Merkur App and Customer Portal are shown in Posteingang; IPS is shown in Von Makler Betreut.",
+    logicalP4: "The individual technical values, such as Insured Event status, Insured Event substatus / detailed status and claim status, may still be exposed for transparency, testing, debugging or other internal purposes. The Combined Status remains the central status value for display and service logic.",
+    adumTitle: "ADUM document visibility logic",
+    adumP1: "Within SCR-7966 MI: CP Inbox extension (adding a new tab), the following logic is defined for the documents ADUM GV and ADUM ANFORDERUNGEN. The visibility is triggered when the document is created. The KPOR Postfach tab is determined by the Claim incoming channel.",
+    parameter: "Parameter",
+    valueRule: "Value / Rule",
+    kporDisplayTab: "KPOR display tab",
+    documentCreated: "Document created",
+    visibleForCustomer: "Visible for customer",
+    visibleForCustomerValue: "As soon as the ADUM document is created. The KPOR tab is selected according to the Claim incoming channel.",
+    adumInfoBox: "The ADUM document is visible as soon as the document is created. The former visibility trigger SETTLED / REJECTED is no longer used for this document visibility decision. The KPOR Postfach tab is determined by the Claim incoming channel: channels 1 Post, 2 E-Mail, 3 Website, 4 Merkur App and 5 Customer Portal are shown in Posteingang; channel 6 IPS is shown in Von Makler Betreut.",
+    combinedClaimsTitle: "Combined Insured Event Status based on claims",
+    combinedClaimsP1: "The statuses SETTLED and REJECTED are linked to JIRA ticket SCR-7949, where the detailed logic for determining the Insured Event status based on claim statuses is defined using the attribute: COMBINED INSURED EVENT STATUS BASED ON CLAIMS.",
+    combinedClaimsP2: "The Claim incoming channel does not change the Combined Insured Event Status. It only determines the KPOR Postfach tab where the created ADUM document is displayed.",
+    savedDesc: "The Insured Event was created in an external system, for example IPS, and has not yet been transferred to Symass.",
+    inProcessDesc: "The Insured Event is still open, or at least one related claim is in process or postponed.",
+    requirementDesc: "Detailed status on Insured Event = 3 - Requirement. This status has absolute priority and is independent of the Insured Event status and claim statuses.",
+    settledDesc: "The Insured Event or the related claims are finally completed. A mix of settled and rejected claims is also treated as settled if at least one claim is settled.",
+    rejectedDesc: "The Insured Event is disposed of, or all related claims are rejected / mistakenly entered.",
+    claimObjectMapping: "Claim object mapping",
+    insuredEventObjectMapping: "Insured Event object mapping",
+    combinedGroup: "Combined group",
+    claimStatus: "Claim status",
+    channelMappingTitle: "Claim incoming channel mapping to KPOR Postfach tab",
+    channelMappingP1: "The following mapping defines in which KPOR Postfach tab the created ADUM document is displayed, depending on the Claim incoming channel.",
+    channelCode: "Claim incoming channel code",
+    portalVisibilityPrefix: "Portal visibility: ADUM documents visible as soon as document is created · KPOR tab: ",
+    removeClaim: "remove claim",
+    locOptions: {
+      symass: "In Symass",
+      external: "Only in the external system, e.g. IPS - not yet transferred"
     },
-    "IN PROCESS": {
-      bg: "#E6F1FB",
-      fg: "#0C447C",
-      border: "#C9DFF0",
-      label: "IN PROCESS"
+    detOptions: {
+      empty: "not set",
+      req: "3 - Requirement"
     },
-    REQUIREMENT: {
-      bg: "#FAEEDA",
-      fg: "#633806",
-      border: "#EAD3AA",
-      label: "REQUIREMENT"
-    },
-    SETTLED: {
-      bg: "#E1F5EE",
-      fg: "#085041",
-      border: "#B9E6D9",
-      label: "SETTLED"
-    },
-    REJECTED: {
-      bg: "#FAECE7",
-      fg: "#712B13",
-      border: "#EDC8BA",
-      label: "REJECTED"
+    reasons: {
+      saved: "The Insured Event was created in the external system and has not yet been transferred to Symass.",
+      requirement: "Detailed status on Insured Event = 3 - Requirement. Requirement has absolute priority, regardless of Insured Event status and claim statuses.",
+      noClaimsProcess: "There are no claims. The Insured Event status belongs to the PROCESS group.",
+      noClaimsSettled: "There are no claims. The Insured Event status belongs to the SETTLED group.",
+      noClaimsRejected: "There are no claims. The Insured Event status belongs to the REJECTED group.",
+      fallback: "Fallback to IN PROCESS because no clear status group could be determined.",
+      hasProcess: "At least one claim is in the PROCESS group: 1 In Process or 5 Postponed. This has priority over all other claim combinations.",
+      allSettled: "All claims are in the SETTLED group: 3 Settled, 7 Reverted or 4 Migrated Claim.",
+      mixSettledRejected: "At least one claim is settled and all remaining claims are rejected. Settled takes precedence.",
+      allRejected: "All claims are in the REJECTED group: 2 Rejected or 6 Mistakenly entered.",
+      mixedFallback: "Mixed combination without a clear final result. Fallback to IN PROCESS."
     }
-  };
+  },
 
-  function compute() {
-    const loc = document.getElementById('loc').value;
-    const insuredEventStatus = document.getElementById('insuredEventStatus').value;
-    const detStatus = document.getElementById('detStatus').value;
-    const claimIncomingChannel = document.getElementById('claimIncomingChannel').value;
-    const channelInfo = CLAIM_INCOMING_CHANNELS[claimIncomingChannel] || CLAIM_INCOMING_CHANNELS['6'];
-
-    let status;
-    let reason;
-
-    if (loc === 'external') {
-      status = 'SAVED';
-      reason = 'The Insured Event was created in the external system and has not yet been transferred to Symass.';
-    } else if (detStatus === '3') {
-      status = 'REQUIREMENT';
-      reason = 'Detailed status on Insured Event = 3 (Requirement). Requirement has absolute priority, regardless of Insured Event status and claim statuses.';
-    } else if (claims.length === 0) {
-      if (INSURED_EVENT_PROCESS.includes(insuredEventStatus)) {
-        status = 'IN PROCESS';
-        reason = 'There are no claims. The Insured Event status belongs to the PROCESS group.';
-      } else if (INSURED_EVENT_SETTLED.includes(insuredEventStatus)) {
-        status = 'SETTLED';
-        reason = 'There are no claims. The Insured Event status belongs to the SETTLED group.';
-      } else if (INSURED_EVENT_REJECTED.includes(insuredEventStatus)) {
-        status = 'REJECTED';
-        reason = 'There are no claims. The Insured Event status belongs to the REJECTED group.';
-      } else {
-        status = 'IN PROCESS';
-        reason = 'Fallback to IN PROCESS because no clear status group could be determined.';
-      }
-    } else {
-      const hasProcess = claims.some(c => PROCESS_CLAIM.includes(c.status));
-      const allSettled = claims.every(c => SETTLED_CLAIM.includes(c.status));
-      const allRejected = claims.every(c => REJECTED_CLAIM.includes(c.status));
-      const mixSettledRejected = claims.some(c => SETTLED_CLAIM.includes(c.status)) &&
-        claims.every(c => SETTLED_CLAIM.includes(c.status) || REJECTED_CLAIM.includes(c.status));
-
-      if (hasProcess) {
-        status = 'IN PROCESS';
-        reason = 'At least one claim is in the PROCESS group (1 In Process or 5 Postponed). This has priority over all other claim combinations.';
-      } else if (allSettled) {
-        status = 'SETTLED';
-        reason = 'All claims are in the SETTLED group (3 Settled, 7 Reverted or 4 Migrated Claim).';
-      } else if (mixSettledRejected) {
-        status = 'SETTLED';
-        reason = 'At least one claim is settled and all remaining claims are rejected. Settled takes precedence.';
-      } else if (allRejected) {
-        status = 'REJECTED';
-        reason = 'All claims are in the REJECTED group (2 Rejected or 6 Mistakenly entered).';
-      } else {
-        status = 'IN PROCESS';
-        reason = 'Mixed combination without a clear final result. Fallback to IN PROCESS.';
-      }
+  sl: {
+    mainTitle: "Logika kombiniranega statusa zavarovalnega primera",
+    mainIntro: "Stran je namenjena preverjanju dejanskega statusa / podstatusa zavarovalnega primera in določitvi rezultata Combined Insured Event Status. ADUM dokumenti so vidni takoj, ko je dokument ustvarjen; KPOR Postfach tab se določi glede na vhodni kanal claima.",
+    interactiveTest: "Interaktivni test",
+    statusTester: "Tester kombinacij statusov",
+    testerIntro: "Izberi vhodni kanal claima, lokacijo zavarovalnega primera, status, podrobni status in claim statuse. Tester izračuna kombinirani status in KPOR Postfach tab. Podrobni status 3 - Requirement ima vedno prioriteto.",
+    locLabel: "Kje se nahaja zavarovalni primer?",
+    claimIncomingChannel: "Vhodni kanal claima",
+    insuredEventStatus: "Status zavarovalnega primera",
+    detStatus: "Podrobni status zavarovalnega primera",
+    claimsOnIe: "Claim-i na tem zavarovalnem primeru",
+    addClaim: "+ dodaj claim",
+    noClaims: "Ni vnesenih claimov - uporabi se samo status zavarovalnega primera.",
+    resultLabel: "kombinirani status zavarovalnega primera",
+    kporTab: "KPOR tab",
+    visibilityTrigger: "Sprožilec vidnosti",
+    documentCreatedUpper: "DOKUMENT USTVARJEN",
+    logicalSummaryTitle: "Logični povzetek / opis rešitve",
+    logicalP1: "Predlagana rešitev uvaja en centralni Combined Insured Event Status, ki se izračuna na podlagi statusa zavarovalnega primera, podrobnega statusa na zavarovalnem primeru in povezanih claim statusov.",
+    logicalP2: "Podrobni status 3 - Requirement ima absolutno prioriteto. Če je podrobni status na zavarovalnem primeru 3 - Requirement, je Combined Insured Event Status vedno REQUIREMENT, ne glede na status zavarovalnega primera in ne glede na povezane claim statuse.",
+    logicalP3: "ADUM dokumenti so vidni takoj, ko je dokument ustvarjen. Ciljni KPOR Postfach tab se določi glede na vhodni kanal claima: Post, E-Mail, Website, Merkur App in Customer Portal so prikazani v Posteingang; IPS je prikazan v Von Makler Betreut.",
+    logicalP4: "Posamezne tehnične vrednosti, kot so status zavarovalnega primera, podstatus / podrobni status zavarovalnega primera in claim status, se lahko še vedno prikažejo za transparentnost, testiranje, debugging ali druge interne namene. Combined Status ostane centralna statusna vrednost za prikaz in servisno logiko.",
+    adumTitle: "Logika vidnosti ADUM dokumentov",
+    adumP1: "V okviru SCR-7966 MI: CP Inbox extension, kjer se dodaja nov tab, je za dokumenta ADUM GV in ADUM ANFORDERUNGEN definirana naslednja logika. Vidnost se sproži, ko je dokument ustvarjen. KPOR Postfach tab se določi glede na vhodni kanal claima.",
+    parameter: "Parameter",
+    valueRule: "Vrednost / pravilo",
+    kporDisplayTab: "KPOR prikazni tab",
+    documentCreated: "Dokument ustvarjen",
+    visibleForCustomer: "Vidno za stranko",
+    visibleForCustomerValue: "Takoj ko je ADUM dokument ustvarjen. KPOR tab se izbere glede na vhodni kanal claima.",
+    adumInfoBox: "ADUM dokument je viden takoj, ko je dokument ustvarjen. Prejšnji sprožilec vidnosti SETTLED / REJECTED se za to odločitev o vidnosti dokumenta ne uporablja več. KPOR Postfach tab se določi glede na vhodni kanal claima: kanali 1 Post, 2 E-Mail, 3 Website, 4 Merkur App in 5 Customer Portal so prikazani v Posteingang; kanal 6 IPS je prikazan v Von Makler Betreut.",
+    combinedClaimsTitle: "Combined Insured Event Status na podlagi claimov",
+    combinedClaimsP1: "Statusa SETTLED in REJECTED sta povezana z JIRA ticketom SCR-7949, kjer je definirana podrobna logika za določitev statusa zavarovalnega primera na podlagi claim statusov z atributom: COMBINED INSURED EVENT STATUS BASED ON CLAIMS.",
+    combinedClaimsP2: "Vhodni kanal claima ne spremeni Combined Insured Event Status. Določa samo KPOR Postfach tab, v katerem je prikazan ustvarjeni ADUM dokument.",
+    savedDesc: "Zavarovalni primer je bil ustvarjen v zunanjem sistemu, na primer IPS, in še ni bil prenesen v Symass.",
+    inProcessDesc: "Zavarovalni primer je še odprt ali pa je vsaj en povezan claim v obdelavi oziroma odložen.",
+    requirementDesc: "Podrobni status na zavarovalnem primeru = 3 - Requirement. Ta status ima absolutno prioriteto in je neodvisen od statusa zavarovalnega primera ter claim statusov.",
+    settledDesc: "Zavarovalni primer ali povezani claim-i so dokončno zaključeni. Kombinacija settled in rejected claimov se prav tako obravnava kot SETTLED, če je vsaj en claim settled.",
+    rejectedDesc: "Zavarovalni primer je disposed of ali pa so vsi povezani claim-i rejected / mistakenly entered.",
+    claimObjectMapping: "Mapping claim objekta",
+    insuredEventObjectMapping: "Mapping zavarovalnega primera",
+    combinedGroup: "Kombinirana skupina",
+    claimStatus: "Claim status",
+    channelMappingTitle: "Mapping vhodnega kanala claima na KPOR Postfach tab",
+    channelMappingP1: "Naslednji mapping določa, v katerem KPOR Postfach tabu je prikazan ustvarjeni ADUM dokument, glede na vhodni kanal claima.",
+    channelCode: "Koda vhodnega kanala claima",
+    portalVisibilityPrefix: "Vidnost v portalu: ADUM dokumenti so vidni takoj, ko je dokument ustvarjen · KPOR tab: ",
+    removeClaim: "odstrani claim",
+    locOptions: {
+      symass: "V Symass",
+      external: "Samo v zunanjem sistemu, npr. IPS - še ni preneseno"
+    },
+    detOptions: {
+      empty: "ni nastavljeno",
+      req: "3 - Requirement"
+    },
+    reasons: {
+      saved: "Zavarovalni primer je bil ustvarjen v zunanjem sistemu in še ni bil prenesen v Symass.",
+      requirement: "Podrobni status na zavarovalnem primeru = 3 - Requirement. Requirement ima absolutno prioriteto, ne glede na status zavarovalnega primera in claim statuse.",
+      noClaimsProcess: "Claim-i niso vneseni. Status zavarovalnega primera spada v skupino PROCESS.",
+      noClaimsSettled: "Claim-i niso vneseni. Status zavarovalnega primera spada v skupino SETTLED.",
+      noClaimsRejected: "Claim-i niso vneseni. Status zavarovalnega primera spada v skupino REJECTED.",
+      fallback: "Fallback na IN PROCESS, ker ni bilo mogoče določiti jasne statusne skupine.",
+      hasProcess: "Vsaj en claim je v skupini PROCESS: 1 In Process ali 5 Postponed. To ima prioriteto pred vsemi drugimi claim kombinacijami.",
+      allSettled: "Vsi claim-i so v skupini SETTLED: 3 Settled, 7 Reverted ali 4 Migrated Claim.",
+      mixSettledRejected: "Vsaj en claim je settled, vsi ostali claim-i pa so rejected. Settled ima prednost.",
+      allRejected: "Vsi claim-i so v skupini REJECTED: 2 Rejected ali 6 Mistakenly entered.",
+      mixedFallback: "Mešana kombinacija brez jasnega končnega rezultata. Fallback na IN PROCESS."
     }
-
-    const s = STYLES[status];
-    const card = document.getElementById('resultCard');
-    const resultLabel = document.getElementById('resultLabel');
-    const resultValue = document.getElementById('resultValue');
-    const resultReason = document.getElementById('resultReason');
-    const portalVisibility = document.getElementById('portalVisibility');
-
-    card.style.background = s.bg;
-    card.style.borderColor = s.border;
-
-    resultLabel.style.color = s.fg;
-    resultValue.style.color = s.fg;
-    resultReason.style.color = s.fg;
-    portalVisibility.style.color = s.fg;
-
-    resultValue.textContent = s.label;
-    resultReason.textContent = reason;
-
-    const metaIncomingChannel = document.getElementById('metaIncomingChannel');
-    const metaKporTab = document.getElementById('metaKporTab');
-    const businessIncomingChannel = document.getElementById('businessIncomingChannel');
-    const businessKporTab = document.getElementById('businessKporTab');
-
-    if (metaIncomingChannel) metaIncomingChannel.textContent = channelInfo.label;
-    if (metaKporTab) metaKporTab.textContent = channelInfo.kporTab;
-    if (businessIncomingChannel) businessIncomingChannel.textContent = channelInfo.label;
-    if (businessKporTab) businessKporTab.textContent = channelInfo.kporTab;
-
-    portalVisibility.textContent = 'Portal visibility: ADUM documents visible as soon as document is created · KPOR tab: ' + channelInfo.kporTab;
-
   }
+};
 
-  document.getElementById('loc').addEventListener('change', compute);
-  document.getElementById('claimIncomingChannel').addEventListener('change', compute);
-  document.getElementById('insuredEventStatus').addEventListener('change', compute);
-  document.getElementById('detStatus').addEventListener('change', compute);
+const CHANNELS = {
+  "1": { label: "1 - Post", kporTab: "Posteingang" },
+  "2": { label: "2 - E-Mail", kporTab: "Posteingang" },
+  "3": { label: "3 - Website", kporTab: "Posteingang" },
+  "4": { label: "4 - Merkur App", kporTab: "Posteingang" },
+  "5": { label: "5 - Customer Portal", kporTab: "Posteingang" },
+  "6": { label: "6 - IPS", kporTab: "Von Makler Betreut" }
+};
 
+const claimOptions = [
+  ["1","1 - In Process"],
+  ["5","5 - Postponed"],
+  ["3","3 - Settled"],
+  ["7","7 - Reverted"],
+  ["4","4 - Migrated Claim"],
+  ["2","2 - Rejected"],
+  ["6","6 - Mistakenly entered"]
+];
+
+const insuredEventOptions = [
+  ["1","1 - In Process"],
+  ["5","5 - Re-opened"],
+  ["6","6 - Postponed"],
+  ["2","2 - Finished"],
+  ["4","4 - Preliminary finished"],
+  ["7","7 - Time-barred"],
+  ["3","3 - Disposed of"]
+];
+
+const PROCESS_CLAIM = ["1","5"];
+const SETTLED_CLAIM = ["3","7","4"];
+const REJECTED_CLAIM = ["2","6"];
+const INSURED_EVENT_PROCESS = ["1","5","6"];
+const INSURED_EVENT_SETTLED = ["2","4","7"];
+const INSURED_EVENT_REJECTED = ["3"];
+
+const STYLES = {
+  SAVED: { bg: "#f1efe8", fg: "#5f5e5a", border: "#dedbd0", label: "SAVED" },
+  "IN PROCESS": { bg: "#E6F1FB", fg: "#0C447C", border: "#C9DFF0", label: "IN PROCESS" },
+  REQUIREMENT: { bg: "#FAEEDA", fg: "#633806", border: "#EAD3AA", label: "REQUIREMENT" },
+  SETTLED: { bg: "#E1F5EE", fg: "#085041", border: "#B9E6D9", label: "SETTLED" },
+  REJECTED: { bg: "#FAECE7", fg: "#712B13", border: "#EDC8BA", label: "REJECTED" }
+};
+
+function fillSelect(id, options, selectedValue) {
+  const el = document.getElementById(id);
+  const current = el.value || selectedValue;
+  el.innerHTML = options.map(o => `<option value="${o[0]}" ${o[0] === current ? "selected" : ""}>${o[1]}</option>`).join("");
+}
+
+function renderStaticOptions() {
+  const t = TEXTS[currentLang];
+
+  fillSelect("loc", [
+    ["symass", t.locOptions.symass],
+    ["external", t.locOptions.external]
+  ], "symass");
+
+  fillSelect("claimIncomingChannel", Object.keys(CHANNELS).map(k => [k, CHANNELS[k].label]), "6");
+  fillSelect("insuredEventStatus", insuredEventOptions, "1");
+
+  fillSelect("detStatus", [
+    ["", t.detOptions.empty],
+    ["3", t.detOptions.req]
+  ], "");
+}
+
+function applyTexts() {
+  const t = TEXTS[currentLang];
+
+  document.querySelectorAll("[data-i18n]").forEach(el => {
+    const key = el.getAttribute("data-i18n");
+    if (t[key] !== undefined) {
+      el.textContent = t[key];
+    }
+  });
+
+  document.documentElement.lang = currentLang;
+  document.getElementById("btnLangEn").style.background = currentLang === "en" ? "#2c2c2a" : "#ffffff";
+  document.getElementById("btnLangEn").style.color = currentLang === "en" ? "#ffffff" : "#2c2c2a";
+  document.getElementById("btnLangSl").style.background = currentLang === "sl" ? "#2c2c2a" : "#ffffff";
+  document.getElementById("btnLangSl").style.color = currentLang === "sl" ? "#ffffff" : "#2c2c2a";
+}
+
+function setLang(lang) {
+  currentLang = lang;
+  applyTexts();
+  renderStaticOptions();
   renderClaims();
   compute();
-})();
+}
+
+window.setLang = setLang;
+
+function addClaim() {
+  claims.push({ id: nextId++, status: "1" });
+  renderClaims();
+  compute();
+}
+window.addClaim = addClaim;
+
+function removeClaim(id) {
+  claims = claims.filter(c => c.id !== id);
+  renderClaims();
+  compute();
+}
+window.removeClaim = removeClaim;
+
+function setClaimStatus(id, val) {
+  const c = claims.find(c => c.id === id);
+  if (c) c.status = val;
+  compute();
+}
+window.setClaimStatus = setClaimStatus;
+
+function renderClaims() {
+  const el = document.getElementById("claimsList");
+  const noClaims = document.getElementById("noClaims");
+  const t = TEXTS[currentLang];
+
+  noClaims.style.display = claims.length ? "none" : "block";
+
+  el.innerHTML = claims.map(c => {
+    const opts = claimOptions.map(o => `<option value="${o[0]}" ${o[0] === c.status ? "selected" : ""}>${o[1]}</option>`).join("");
+
+    return `<table style="width:100%;border-collapse:collapse;margin-bottom:8px;">
+      <tr>
+        <td style="padding:0 7px 0 0;">
+          <select onchange="setClaimStatus(${c.id}, this.value)" style="width:100%;font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:10px 12px;background:#ffffff;color:#2c2c2a;box-sizing:border-box;">${opts}</select>
+        </td>
+        <td style="width:1%;white-space:nowrap;">
+          <button onclick="removeClaim(${c.id})" aria-label="${t.removeClaim}" style="font-size:14px;border:1px solid #d3d1c7;border-radius:10px;padding:8px 11px;background:#ffffff;color:#2c2c2a;cursor:pointer;font-weight:700;">x</button>
+        </td>
+      </tr>
+    </table>`;
+  }).join("");
+}
+
+function compute() {
+  const t = TEXTS[currentLang];
+  const loc = document.getElementById("loc").value;
+  const insuredEventStatus = document.getElementById("insuredEventStatus").value;
+  const detStatus = document.getElementById("detStatus").value;
+  const claimIncomingChannel = document.getElementById("claimIncomingChannel").value;
+  const channelInfo = CHANNELS[claimIncomingChannel] || CHANNELS["6"];
+
+  let status;
+  let reason;
+
+  if (loc === "external") {
+    status = "SAVED";
+    reason = t.reasons.saved;
+  } else if (detStatus === "3") {
+    status = "REQUIREMENT";
+    reason = t.reasons.requirement;
+  } else if (claims.length === 0) {
+    if (INSURED_EVENT_PROCESS.includes(insuredEventStatus)) {
+      status = "IN PROCESS";
+      reason = t.reasons.noClaimsProcess;
+    } else if (INSURED_EVENT_SETTLED.includes(insuredEventStatus)) {
+      status = "SETTLED";
+      reason = t.reasons.noClaimsSettled;
+    } else if (INSURED_EVENT_REJECTED.includes(insuredEventStatus)) {
+      status = "REJECTED";
+      reason = t.reasons.noClaimsRejected;
+    } else {
+      status = "IN PROCESS";
+      reason = t.reasons.fallback;
+    }
+  } else {
+    const hasProcess = claims.some(c => PROCESS_CLAIM.includes(c.status));
+    const allSettled = claims.every(c => SETTLED_CLAIM.includes(c.status));
+    const allRejected = claims.every(c => REJECTED_CLAIM.includes(c.status));
+    const mixSettledRejected = claims.some(c => SETTLED_CLAIM.includes(c.status)) &&
+      claims.every(c => SETTLED_CLAIM.includes(c.status) || REJECTED_CLAIM.includes(c.status));
+
+    if (hasProcess) {
+      status = "IN PROCESS";
+      reason = t.reasons.hasProcess;
+    } else if (allSettled) {
+      status = "SETTLED";
+      reason = t.reasons.allSettled;
+    } else if (mixSettledRejected) {
+      status = "SETTLED";
+      reason = t.reasons.mixSettledRejected;
+    } else if (allRejected) {
+      status = "REJECTED";
+      reason = t.reasons.allRejected;
+    } else {
+      status = "IN PROCESS";
+      reason = t.reasons.mixedFallback;
+    }
+  }
+
+  const s = STYLES[status];
+  const card = document.getElementById("resultCard");
+  const resultLabel = document.getElementById("resultLabel");
+  const resultValue = document.getElementById("resultValue");
+  const resultReason = document.getElementById("resultReason");
+  const portalVisibility = document.getElementById("portalVisibility");
+
+  card.style.background = s.bg;
+  card.style.borderColor = s.border;
+  resultLabel.style.color = s.fg;
+  resultValue.style.color = s.fg;
+  resultReason.style.color = s.fg;
+  portalVisibility.style.color = s.fg;
+
+  resultValue.textContent = s.label;
+  resultReason.textContent = reason;
+
+  document.getElementById("metaIncomingChannel").textContent = channelInfo.label;
+  document.getElementById("metaKporTab").textContent = channelInfo.kporTab;
+  document.getElementById("businessIncomingChannel").textContent = channelInfo.label;
+  document.getElementById("businessKporTab").textContent = channelInfo.kporTab;
+  portalVisibility.textContent = t.portalVisibilityPrefix + channelInfo.kporTab;
+}
+
+document.getElementById("loc").addEventListener("change", compute);
+document.getElementById("claimIncomingChannel").addEventListener("change", compute);
+document.getElementById("insuredEventStatus").addEventListener("change", compute);
+document.getElementById("detStatus").addEventListener("change", compute);
+
+applyTexts();
+renderStaticOptions();
+renderClaims();
+compute();
 </script>
-```
 
-
- 
+</body>
+</html>
